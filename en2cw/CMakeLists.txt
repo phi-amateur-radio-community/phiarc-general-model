@@ -3,10 +3,12 @@
 #
 
 # Add source to this project's executable.
-add_executable (en2cw "src/main.cpp"  "include/en2cw/GlobalConfig.h")
+add_executable (EecInfer "src/EecInfer.cpp")
+add_executable (EecTrain "src/EecTrain.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET en2cw PROPERTY CXX_STANDARD 20)
+  set_property(TARGET EecInfer PROPERTY CXX_STANDARD 20)
+  set_property(TARGET EecTrain PROPERTY CXX_STANDARD 20)
 endif()
 
 # TODO: Add tests and install targets if needed.
