@@ -3,8 +3,9 @@
 #
 
 # Add source to this project's executable.
-add_executable (EecInfer "src/EecInfer.cpp")
-add_executable (EecTrain "src/EecTrain.cpp")
+set(MODELS "src/model/Transformer.cpp" "src/model/Forward.cpp")
+add_executable (EecInfer "src/EecInfer.cpp" ${MODELS})
+add_executable (EecTrain "src/EecTrain.cpp" "src/model/Transformer.cpp" "src/model/Forward.cpp" ${MODELS})
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET EecInfer PROPERTY CXX_STANDARD 20)

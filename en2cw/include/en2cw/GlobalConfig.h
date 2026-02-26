@@ -4,3 +4,5 @@
 //
 // include/en2cw/GlobalConfig.h
 // Global configuration for en2cw project.
+
+constexpr int HIDDEN_SIZE = 512; // Size of hidden layers in the neural network
