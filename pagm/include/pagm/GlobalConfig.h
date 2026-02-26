@@ -2,7 +2,7 @@
 // Licensed under the GNU General Public License v3.0
 // See LICENSE file for details.
 //
-// include/en2cw/GlobalConfig.h
-// Global configuration for en2cw project.
+// include/pagm/GlobalConfig.h
+// Global configuration.
 
 constexpr int HIDDEN_SIZE = 512; // Size of hidden layers in the neural network

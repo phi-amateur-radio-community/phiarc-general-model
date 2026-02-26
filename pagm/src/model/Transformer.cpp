@@ -3,7 +3,7 @@
 // See LICENSE file for details.
 //
 // src/model/Transformer.cpp
-// Model body for EN2CW.
+// Model body.
 
 #include <iostream>
 #include <fstream>
