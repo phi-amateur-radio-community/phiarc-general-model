@@ -4,5 +4,3 @@
 //
 // include/pagm/GlobalConfig.h
 // Global configuration.
-
-constexpr int HIDDEN_SIZE = 512; // Size of hidden layers in the neural network
