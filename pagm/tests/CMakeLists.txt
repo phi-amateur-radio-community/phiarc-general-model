@@ -11,7 +11,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 add_executable(PagmTest PagmTest.cpp)
-target_link_libraries(PagmTest PRIVATE GTest::gtest_main MODELS)
+target_link_libraries(PagmTest PRIVATE GTest::gtest_main ${MODELS})
 target_include_directories(PagmTest PRIVATE ${PROJECT_SOURCE_DIR}/include)
 
 include(GoogleTest)
