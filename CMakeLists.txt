@@ -12,4 +12,4 @@ endif()
 project ("pagm")
 
 # Include sub-projects.
-add_subdirectory ("pagm")
+add_subdirectory (pagm)
