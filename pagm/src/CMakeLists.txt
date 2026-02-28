@@ -1,4 +1,4 @@
-set(MODELS "model/Transformer.cpp" "model/Forward.cpp" "file/ModelConfig.cpp" "file/ModelPara.cpp")
+set(MODELS "model/Transformer.cpp" "model/Forward.cpp" "io/ModelConfig.cpp" "io/ModelPara.cpp")
 add_executable (PagmInfer PagmInfer.cpp ${MODELS})
 add_executable (PagmTrain PagmTrain.cpp ${MODELS})
 

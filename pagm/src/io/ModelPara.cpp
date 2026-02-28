@@ -9,6 +9,7 @@
 #include <cstring>
 #include <string>
 #include <unistd.h>
+#include <format>
 #include <vector>
 
 using namespace std;
@@ -64,5 +65,18 @@ public:
     [[nodiscard]] pmr::vector<float> getRowCopy(const size_t col) const {
         pmr::vector<float> row(getRow(col), getRow(col + 1));
         return row;
+    }
+
+    [[nodiscard]] string to_string() const {
+        string s;
+        s.reserve(13 * this->rows_ * this->cols_);
+        for (size_t i = 0; i < this->rows_ ; i ++) {
+            for (size_t j = 0; j < this->cols_; j ++) {
+                s += format("{:>12.3f}", this->getData(i, j));
+                s += j == this->cols_-1 ? '\n' : ' ';
+            }
+        }
+        s.pop_back();
+        return s;
     }
 };
