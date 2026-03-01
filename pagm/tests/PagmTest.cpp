@@ -8,6 +8,7 @@
 #include <fcntl.h>
 #include <gtest/gtest.h>
 #include <pagm/math/Matrix.hpp>
+#include <pagm/model/Tokenizer.hpp>
 
 using namespace std;
 
@@ -38,4 +39,14 @@ TEST(MatrixTest, SaveLoad) {
 
     matrix.setData(1, 1, 1.3f);
     EXPECT_NE(matrix_saved, matrix);
+}
+
+TEST(TokenizerTest, Encode) {
+    EXPECT_EQ(encodeToken(Token(SpecialToken::BOS)), 0);
+    EXPECT_EQ(encodeToken(Token('>')), 3);
+    EXPECT_EQ(encodeToken(Token('A')), 4);
+    EXPECT_EQ(encodeToken(Token('Z')), 29);
+    EXPECT_EQ(encodeToken(Token('a')), 30);
+    EXPECT_EQ(encodeToken(Token('0')), 56);
+    EXPECT_EQ(encodeToken(Token('.')), 66);
 }

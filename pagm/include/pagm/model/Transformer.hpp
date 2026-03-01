@@ -7,8 +7,14 @@
 
 #pragma once
 
+#include <string>
+
 #include "Forward.hpp"
+
+using namespace std;
 
 class Transformer {
     Forward forward;
+public:
+    explicit Transformer(string file_path);
 };

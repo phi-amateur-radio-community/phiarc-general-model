@@ -7,4 +7,8 @@
 
 #pragma once
 
-class Forward {};
+#include <math/Matrix.hpp>
+
+class Forward {
+    Matrix embedding;
+};
