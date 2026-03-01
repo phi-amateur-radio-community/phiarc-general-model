@@ -11,6 +11,8 @@
 #include <memory_resource>
 #include <bits/basic_string.h>
 
+using namespace std;
+
 class Matrix {
     float* data_;
 public:
@@ -25,9 +27,13 @@ public:
 
     [[nodiscard]] float getData(size_t row, size_t col) const;
 
+    void setData(size_t row, size_t col, float data) const;
+
     [[nodiscard]] float *getRow(size_t row) const;
 
-    [[nodiscard]] std::vector<float, std::pmr::polymorphic_allocator<float>> getRowCopy(size_t col) const;
+    [[nodiscard]] vector<float, pmr::polymorphic_allocator<float>> getRowCopy(size_t col) const;
 
-    [[nodiscard]] std::string to_string() const;
+    [[nodiscard]] string toString() const;
+
+    [[nodiscard]] bool saveFile(const string& fileName, size_t fileSize) const;
 };

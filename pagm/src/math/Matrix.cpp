@@ -12,6 +12,7 @@
 #include <string>
 #include <unistd.h>
 #include <vector>
+#include <fstream>
 
 using namespace std;
 
@@ -49,20 +50,24 @@ Matrix::Matrix(float** data, const size_t rows, const size_t cols) {
     }
 }
 
-[[nodiscard]] float Matrix::getData(const size_t row, const size_t col) const {
+float Matrix::getData(const size_t row, const size_t col) const {
     return data_[row * cols_ + col];
 }
 
-[[nodiscard]] float* Matrix::getRow(const size_t row) const {
+void Matrix::setData(const size_t row, const size_t col, const float data) const {
+    data_[row * cols_ + col] = data;
+}
+
+float* Matrix::getRow(const size_t row) const {
     return &data_[row * cols_];
 }
 
-[[nodiscard]] pmr::vector<float> Matrix::getRowCopy(const size_t col) const {
+pmr::vector<float> Matrix::getRowCopy(const size_t col) const {
     pmr::vector<float> row(getRow(col), getRow(col + 1));
     return row;
 }
 
-[[nodiscard]] string Matrix::to_string() const {
+string Matrix::toString() const {
     string s;
     s.reserve(13 * this->rows_ * this->cols_);
     for (size_t i = 0; i < this->rows_ ; i ++) {
@@ -73,4 +78,23 @@ Matrix::Matrix(float** data, const size_t rows, const size_t cols) {
     }
     s.pop_back();
     return s;
+}
+
+bool Matrix::saveFile(const string& fileName, const size_t fileSize) const {
+    size_t unsave_size = this->rows_ * this->cols_ * sizeof(float);
+    size_t saved_size = 0;
+    size_t index = 0;
+    while (unsave_size > 0) {
+        ofstream ofs(fileName + '_' + to_string(index), ios::binary | ios::trunc);
+        if (!ofs.is_open()) {
+            return false;
+        }
+        const size_t save_size = unsave_size < fileSize ? unsave_size : fileSize;
+        ofs.write(reinterpret_cast<const char *>(this->data_) + saved_size, static_cast<streamsize>(save_size));
+        ofs.close();
+        index ++;
+        unsave_size -= save_size;
+        saved_size += save_size;
+    }
+    return true;
 }
