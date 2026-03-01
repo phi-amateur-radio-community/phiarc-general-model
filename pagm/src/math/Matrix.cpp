@@ -105,3 +105,7 @@ bool Matrix::saveFile(const string& fileName, const size_t fileSize) const {
 bool Matrix::operator==(const Matrix &matrix) const {
     return matrix.mem_size_ == this->mem_size_ && memcmp(this->data_, matrix.data_, mem_size_) == 0;
 }
+
+bool Matrix::operator!=(const Matrix &matrix) const {
+    return !(*this == matrix);
+}

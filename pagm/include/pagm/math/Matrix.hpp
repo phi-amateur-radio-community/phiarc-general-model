@@ -39,4 +39,6 @@ public:
     [[nodiscard]] bool saveFile(const string& fileName, size_t fileSize) const;
 
     bool operator==(const Matrix& matrix) const;
+
+    bool operator!=(const Matrix& matrix) const;
 };
