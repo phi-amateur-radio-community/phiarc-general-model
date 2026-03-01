@@ -20,6 +20,7 @@ Matrix::Matrix(const size_t rows, const size_t cols) {
     data_ = static_cast<float *>(calloc(rows * cols, sizeof(float)));
     rows_ = rows;
     cols_ = cols;
+    mem_size_ = rows * cols * sizeof(float);
 }
 
 Matrix::Matrix(const size_t rows, const size_t cols, const int* fd) {
@@ -39,12 +40,14 @@ Matrix::Matrix(const size_t rows, const size_t cols, const int* fd) {
     }
     rows_ = rows;
     cols_ = cols;
+    mem_size_ = rows * cols * sizeof(float);
 }
 
 Matrix::Matrix(float** data, const size_t rows, const size_t cols) {
     data_ = static_cast<float *>(malloc(rows * cols * sizeof(float)));
     rows_ = rows;
     cols_ = cols;
+    mem_size_ = rows * cols * sizeof(float);
     for (size_t i = 0; i < rows; i ++) {
         memcpy(data_ + i * cols, data[i], sizeof(float) * cols);
     }
@@ -81,7 +84,7 @@ string Matrix::toString() const {
 }
 
 bool Matrix::saveFile(const string& fileName, const size_t fileSize) const {
-    size_t unsave_size = this->rows_ * this->cols_ * sizeof(float);
+    size_t unsave_size = this->mem_size_;
     size_t saved_size = 0;
     size_t index = 0;
     while (unsave_size > 0) {
@@ -97,4 +100,8 @@ bool Matrix::saveFile(const string& fileName, const size_t fileSize) const {
         saved_size += save_size;
     }
     return true;
+}
+
+bool Matrix::operator==(const Matrix &matrix) const {
+    return matrix.mem_size_ == this->mem_size_ && memcmp(this->data_, matrix.data_, mem_size_) == 0;
 }

@@ -34,5 +34,5 @@ TEST(MatrixTest, SaveLoad) {
 
     const int fd = open("test_0", O_RDONLY);
     const Matrix matrix_saved(2, 2, &fd);
-    EXPECT_EQ(matrix_saved.getData(1, 1), matrix.getData(1, 1));
+    EXPECT_EQ(matrix_saved, matrix);
 }

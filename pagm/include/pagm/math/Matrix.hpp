@@ -18,6 +18,7 @@ class Matrix {
 public:
     size_t rows_;
     size_t cols_;
+    size_t mem_size_;
 
     Matrix(size_t rows, size_t cols);
 
@@ -36,4 +37,6 @@ public:
     [[nodiscard]] string toString() const;
 
     [[nodiscard]] bool saveFile(const string& fileName, size_t fileSize) const;
+
+    bool operator==(const Matrix& matrix) const;
 };
