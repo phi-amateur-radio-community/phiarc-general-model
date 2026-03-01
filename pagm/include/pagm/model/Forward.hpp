@@ -2,7 +2,9 @@
 // Licensed under the GNU General Public License v3.0
 // See LICENSE file for details.
 //
-// src/model/Transformer.cpp
-// Model body.
+// include/pagm/model/Forward.hpp
+// Header file of forward pass.
 
-#include <Transformer.hpp>
+#pragma once
+
+class Forward {};

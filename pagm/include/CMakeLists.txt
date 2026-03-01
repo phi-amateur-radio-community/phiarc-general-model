@@ -1,0 +1,1 @@
+target_sources(PagmModelLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/pagm/model/Forward.hpp ${CMAKE_CURRENT_SOURCE_DIR}/pagm/model/Transformer.hpp)

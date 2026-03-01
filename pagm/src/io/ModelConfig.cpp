@@ -8,7 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include <charconv>
-#include "model/Transformer.cpp"
+#include <pagm/model/Transformer.hpp>
 
 using namespace std;
 

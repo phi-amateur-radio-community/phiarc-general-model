@@ -6,7 +6,9 @@
 // Tests of PAGM.
 
 #include <gtest/gtest.h>
-#include "io/ModelPara.cpp"
+#include <pagm/math/Matrix.hpp>
+
+using namespace std;
 
 TEST(MatrixTest, ToString) {
     const Matrix matrix(3, 2);

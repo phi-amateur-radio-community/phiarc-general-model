@@ -5,4 +5,4 @@
 // src/model/Forward.cpp
 // Forward pass.
 
-class Forward {};
+#include <Forward.hpp>
