@@ -13,7 +13,7 @@ int encodeToken(const Token token) {
     return visit([&]<typename T0>(T0&& val) -> int {
         using T = decay_t<T0>;
         if constexpr (is_same_v<T, char>) {
-            return tokenEncoder[val];
+            return val < 128 ? tokenEncoder[val] : static_cast<int>(SpecialToken::UNK);
         } else {
             return static_cast<int>(val);
         }
