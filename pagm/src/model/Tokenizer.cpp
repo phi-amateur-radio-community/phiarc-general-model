@@ -5,7 +5,7 @@
 // src/model/Tokenizer.cpp
 // Token encoder and decoder.
 
-#include <Tokenizer.hpp>
+#include <model/Tokenizer.hpp>
 
 using namespace std;
 

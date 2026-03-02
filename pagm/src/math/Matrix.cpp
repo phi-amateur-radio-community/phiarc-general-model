@@ -5,7 +5,7 @@
 // src/math/Matrix.hpp
 // Implementation of PAGM Matrix.
 
-#include <Matrix.hpp>
+#include <math/Matrix.hpp>
 #include <cstdlib>
 #include <cstring>
 #include <format>
