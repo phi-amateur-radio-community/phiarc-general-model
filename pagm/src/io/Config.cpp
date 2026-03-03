@@ -2,12 +2,13 @@
 // Licensed under the GNU General Public License v3.0
 // See LICENSE file for details.
 //
-// src/ModelConfig.cpp
+// src/io/Config.cpp
 // Configuration reader and writer.
 
 #include <iostream>
 #include <fstream>
 #include <charconv>
+#include <io/Config.hpp>
 #include <pagm/model/Transformer.hpp>
 
 using namespace std;
@@ -20,8 +21,7 @@ Transformer createTransformer(const string& path) {
 	}
 }
 
-Transformer loadTransformer(const string& path)
-{
+Transformer loadTransformer(const string& path) {
 	ifstream file(path);
 	if (!file.is_open()) {
 		cerr << "Failed to open file: " << path << endl;
