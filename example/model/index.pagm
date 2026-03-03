@@ -1,8 +1,8 @@
-384 Hidden Size
-256 Sequence Length
-6 Head Number
-6 Encoder Layers
-6 Decoder Layers
+64 Hidden Size
+32 Sequence Length
+3 Head Number
+3 Encoder Layers
+3 Decoder Layers
 embedding 0
 
 Example Model of PhiArc General Model
