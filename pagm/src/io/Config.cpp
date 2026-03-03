@@ -9,7 +9,7 @@
 #include <fstream>
 #include <charconv>
 #include <io/Config.hpp>
-#include <pagm/model/Transformer.hpp>
+#include <model/Transformer.hpp>
 
 using namespace std;
 
