@@ -1,0 +1,14 @@
+64 Hidden Size
+32 Sequence Length
+3 Head Number
+3 Encoder Layers
+3 Decoder Layers
+embedding 0
+
+Test Model of PhiArc General Model
+Version 0.1.0
+Author: Phiarc Team
+
+This file is a test of PAGM project.
+
+Copyright (c) 2026 St Rangeset
