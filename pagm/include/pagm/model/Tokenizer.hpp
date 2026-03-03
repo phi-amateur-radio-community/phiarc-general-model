@@ -26,6 +26,12 @@ struct Token {
 int encodeToken(Token token);
 Token decodeToken(int index);
 
+constexpr char symbols[] = {
+    '.', ',', '?', '\'', '!', '/', '(', ')',
+    '&', ':', ';', '=', '+', '-', '_', '"',
+    '$', '@'
+};
+
 constexpr array<int, 128> makeTokenEncoder() {
     array<int, 128> map{};
     fill(map.begin(), map.end(), 3);
@@ -35,24 +41,9 @@ constexpr array<int, 128> makeTokenEncoder() {
     for (char c = 'a'; c <= 'z'; c++) map[c] = index++;
     for (char c = '0'; c <= '9'; c++) map[c] = index++;
 
-    map['.'] = index++;
-    map[','] = index++;
-    map['?'] = index++;
-    map['\''] = index++;
-    map['!'] = index++;
-    map['/'] = index++;
-    map['('] = index++;
-    map[')'] = index++;
-    map['&'] = index++;
-    map[':'] = index++;
-    map[';'] = index++;
-    map['='] = index++;
-    map['+'] = index++;
-    map['-'] = index++;
-    map['_'] = index++;
-    map['"'] = index++;
-    map['$'] = index++;
-    map['@'] = index++;
+    for (char c : symbols) {
+        map[c] = index++;
+    }
 
     return map;
 }
@@ -70,12 +61,6 @@ constexpr array<Token, 84> makeTokenDecoder() {
     for (char c = 'A'; c <= 'Z'; c++) map[c - 'A' + 4].value = c;
     for (char c = 'a'; c <= 'z'; c++) map[c - 'a' + 30].value = c;
     for (char c = '0'; c <= '9'; c++) map[c - '0' + 56].value = c;
-
-    constexpr char symbols[] = {
-        '.', ',', '?', '\'', '!', '/', '(', ')',
-        '&', ':', ';', '=', '+', '-', '_', '"',
-        '$', '@'
-    };
 
     int index = 66;
 
