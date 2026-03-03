@@ -6,11 +6,11 @@
 // Implementation of PAGM Matrix.
 
 #include <math/Matrix.hpp>
+#include <io/Parameter.hpp>
 #include <cstdlib>
 #include <cstring>
 #include <format>
 #include <string>
-#include <unistd.h>
 #include <vector>
 #include <fstream>
 
@@ -24,23 +24,10 @@ Matrix::Matrix(const size_t rows, const size_t cols) {
 }
 
 Matrix::Matrix(const size_t rows, const size_t cols, const int* fd) {
-    data_ = static_cast<float *>(malloc(rows * cols * sizeof(float)));
-    size_t index = 0;
-    size_t total = 0;
-    const size_t size = rows * cols * sizeof(float);
-    while (total < size) {
-        if (const ssize_t n = read(fd[index], reinterpret_cast<char *>(data_) + total, size); n < 0) {
-            perror("read");
-            exit(1);
-        } else if (n == 0) {
-            index ++;
-        } else {
-            total += n;
-        }
-    }
     rows_ = rows;
     cols_ = cols;
     mem_size_ = rows * cols * sizeof(float);
+    data_ = readParameter(mem_size_, fd);
 }
 
 Matrix::Matrix(float** data, const size_t rows, const size_t cols) {
@@ -72,11 +59,11 @@ pmr::vector<float> Matrix::getRowCopy(const size_t col) const {
 
 string Matrix::toString() const {
     string s;
-    s.reserve(13 * this->rows_ * this->cols_);
-    for (size_t i = 0; i < this->rows_ ; i ++) {
-        for (size_t j = 0; j < this->cols_; j ++) {
-            s += format("{:>12.3f}", this->getData(i, j));
-            s += j == this->cols_-1 ? '\n' : ' ';
+    s.reserve(13 *rows_ * cols_);
+    for (size_t i = 0; i < rows_ ; i ++) {
+        for (size_t j = 0; j < cols_; j ++) {
+            s += format("{:>12.3f}", getData(i, j));
+            s += j == cols_-1 ? '\n' : ' ';
         }
     }
     s.pop_back();
@@ -84,7 +71,7 @@ string Matrix::toString() const {
 }
 
 bool Matrix::saveFile(const string& fileName, const size_t fileSize) const {
-    size_t unsave_size = this->mem_size_;
+    size_t unsave_size = mem_size_;
     size_t saved_size = 0;
     size_t index = 0;
     while (unsave_size > 0) {
@@ -93,7 +80,7 @@ bool Matrix::saveFile(const string& fileName, const size_t fileSize) const {
             return false;
         }
         const size_t save_size = unsave_size < fileSize ? unsave_size : fileSize;
-        ofs.write(reinterpret_cast<const char *>(this->data_) + saved_size, static_cast<streamsize>(save_size));
+        ofs.write(reinterpret_cast<const char *>(data_) + saved_size, static_cast<streamsize>(save_size));
         ofs.close();
         index ++;
         unsave_size -= save_size;
@@ -103,7 +90,7 @@ bool Matrix::saveFile(const string& fileName, const size_t fileSize) const {
 }
 
 bool Matrix::operator==(const Matrix &matrix) const {
-    return matrix.mem_size_ == this->mem_size_ && memcmp(this->data_, matrix.data_, mem_size_) == 0;
+    return matrix.mem_size_ == mem_size_ && memcmp(data_, matrix.data_, mem_size_) == 0;
 }
 
 bool Matrix::operator!=(const Matrix &matrix) const {
