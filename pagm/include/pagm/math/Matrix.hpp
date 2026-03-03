@@ -10,6 +10,7 @@
 #include <cstdlib>
 #include <memory_resource>
 #include <bits/basic_string.h>
+#include <io/Parameter.hpp>
 
 using namespace std;
 
@@ -36,7 +37,7 @@ public:
 
     [[nodiscard]] string toString() const;
 
-    [[nodiscard]] bool saveFile(const string& fileName, size_t fileSize) const;
+    void saveFile(Parameter& parameter) const;
 
     bool operator==(const Matrix& matrix) const;
 

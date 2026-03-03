@@ -31,7 +31,8 @@ TEST(MatrixTest, SaveLoad) {
     matrix.setData(0, 1, 1.9f);
     matrix.setData(1, 0, 3.7f);
     matrix.setData(1, 1, 1.2f);
-    EXPECT_EQ(matrix.saveFile("test", 100), true);
+    Parameter parameter("test", ".pagmb", 100);
+    matrix.saveFile(parameter);
 
     const int fd = open("test_0", O_RDONLY);
     const Matrix matrix_saved(2, 2, &fd);

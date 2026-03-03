@@ -8,9 +8,21 @@
 #pragma once
 
 #include <string>
+#include <fstream>
 
 using namespace std;
 
-bool multiOutstream();
+class Parameter {
+    string fileName_;
+    string fileExpand_;
+    ofstream file_;
+    size_t count_;
+    size_t free_;
+    size_t fileSize_;
+    void createFd();
+public:
+    Parameter(const string& fileName, const string& fileExpand, const size_t& fileSize);
+    void saveParameter(const float* data, const size_t& dataSize);
+};
 
 float* readParameter(size_t mem_size,  const int* fd);

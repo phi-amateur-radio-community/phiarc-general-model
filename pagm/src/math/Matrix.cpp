@@ -6,13 +6,11 @@
 // Implementation of PAGM Matrix.
 
 #include <math/Matrix.hpp>
-#include <io/Parameter.hpp>
 #include <cstdlib>
 #include <cstring>
 #include <format>
 #include <string>
 #include <vector>
-#include <fstream>
 
 using namespace std;
 
@@ -70,23 +68,8 @@ string Matrix::toString() const {
     return s;
 }
 
-bool Matrix::saveFile(const string& fileName, const size_t fileSize) const {
-    size_t unsave_size = mem_size_;
-    size_t saved_size = 0;
-    size_t index = 0;
-    while (unsave_size > 0) {
-        ofstream ofs(fileName + '_' + to_string(index), ios::binary | ios::trunc);
-        if (!ofs.is_open()) {
-            return false;
-        }
-        const size_t save_size = unsave_size < fileSize ? unsave_size : fileSize;
-        ofs.write(reinterpret_cast<const char *>(data_) + saved_size, static_cast<streamsize>(save_size));
-        ofs.close();
-        index ++;
-        unsave_size -= save_size;
-        saved_size += save_size;
-    }
-    return true;
+void Matrix::saveFile(Parameter& parameter) const {
+    parameter.saveParameter(data_, mem_size_);
 }
 
 bool Matrix::operator==(const Matrix &matrix) const {
